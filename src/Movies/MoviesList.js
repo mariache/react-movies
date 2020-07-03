@@ -37,6 +37,13 @@ export default class MoviesList extends Component {
     });
   };
 
+  onRemoveWatchLater = (id) => {
+    const watchedLater = this.state.watchLater
+      .slice()
+      .filter((x) => x.id !== id);
+    this.setState({ watchLater: watchedLater });
+  };
+
   render() {
     const { movies, watchLater } = this.state;
     return (
@@ -49,6 +56,7 @@ export default class MoviesList extends Component {
                   item={movie}
                   onRemove={this.onRemove}
                   onWatchLater={this.onWatchLater}
+                  onRemoveWatchLater={this.onRemoveWatchLater}
                 />
               </div>
             );

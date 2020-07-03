@@ -1,15 +1,29 @@
 import React from "react";
 
 export default class MovieItem extends React.Component {
+  constructor() {
+    super();
+
+    this.state = {
+      watchLater: false,
+    };
+  }
+
   render() {
-    const { item, onRemove, onWatchLater } = this.props;
+    const { item, onRemove, onWatchLater, onRemoveWatchLater } = this.props;
 
     const onHandleRemove = (id) => () => {
       onRemove(id);
     };
 
     const onHandleWatchLater = (item) => () => {
+      this.setState({ watchLater: true });
       onWatchLater(item);
+    };
+
+    const onHandleRemoveWatchLater = (id) => () => {
+      this.setState({ watchLater: false });
+      onRemoveWatchLater(id);
     };
 
     return (
@@ -25,13 +39,23 @@ export default class MovieItem extends React.Component {
           <h6 className="card-title">{item.title}</h6>
           <div className="d-flex justify-content-between align-items-center">
             <p className="mb-0">Rating: {item.vote_average}</p>
-            <button
-              type="button"
-              className="btn btn-secondary"
-              onClick={onHandleWatchLater(item)}
-            >
-              Watch later
-            </button>
+            {this.state.watchLater ? (
+              <button
+                type="button"
+                className="btn btn-success"
+                onClick={onHandleRemoveWatchLater(item.id)}
+              >
+                Remove From Watch later
+              </button>
+            ) : (
+              <button
+                type="button"
+                className="btn btn-secondary"
+                onClick={onHandleWatchLater(item)}
+              >
+                Watch later
+              </button>
+            )}
           </div>
           <button className="btn btn-danger" onClick={onHandleRemove(item.id)}>
             Delete

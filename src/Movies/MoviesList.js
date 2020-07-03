@@ -8,6 +8,7 @@ export default class MoviesList extends Component {
 
     this.state = {
       movies: [],
+      watchLater: [],
     };
   }
 
@@ -26,20 +27,36 @@ export default class MoviesList extends Component {
 
   onRemove = (id) => {
     const updatedMovies = this.state.movies.slice().filter((x) => x.id !== id);
-    return this.setState({ movies: updatedMovies });
+    this.setState({ movies: updatedMovies });
+  };
+
+  onWatchLater = (movie) => {
+    const watchedLater = [...this.state.watchLater, movie];
+    this.setState({
+      watchLater: watchedLater,
+    });
   };
 
   render() {
-    const { movies } = this.state;
+    const { movies, watchLater } = this.state;
     return (
-      <div className="row">
-        {movies.map((movie) => {
-          return (
-            <div key={movie.id} className="col-6 mb-4">
-              <MovieItem item={movie} onRemove={this.onRemove} />
-            </div>
-          );
-        })}
+      <div className="container">
+        <div className="row">
+          {movies.map((movie) => {
+            return (
+              <div key={movie.id} className="col-6 mb-4">
+                <MovieItem
+                  item={movie}
+                  onRemove={this.onRemove}
+                  onWatchLater={this.onWatchLater}
+                />
+              </div>
+            );
+          })}
+          <div className="col-3">
+            <p>Will watch: {watchLater.length}</p>
+          </div>
+        </div>
       </div>
     );
   }

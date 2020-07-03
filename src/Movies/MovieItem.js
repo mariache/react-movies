@@ -2,7 +2,12 @@ import React from "react";
 
 export default class MovieItem extends React.Component {
   render() {
-    const { item } = this.props;
+    const { item, onRemove } = this.props;
+
+    const onHandleRemove = (id) => () => {
+      onRemove(id);
+    };
+
     return (
       <div className="card" style={{ width: "100%" }}>
         <img
@@ -15,6 +20,9 @@ export default class MovieItem extends React.Component {
         <div className="card-body">
           <h6 className="card-title">{item.title}</h6>
           <div className="card-text">Rate: {item.vote_average}</div>
+          <button className="btn btn-danger" onClick={onHandleRemove(item.id)}>
+            Delete
+          </button>
         </div>
       </div>
     );

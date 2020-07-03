@@ -24,6 +24,11 @@ export default class MoviesList extends Component {
       });
   }
 
+  onRemove = (id) => {
+    const updatedMovies = this.state.movies.slice().filter((x) => x.id !== id);
+    return this.setState({ movies: updatedMovies });
+  };
+
   render() {
     const { movies } = this.state;
     return (
@@ -31,7 +36,7 @@ export default class MoviesList extends Component {
         {movies.map((movie) => {
           return (
             <div key={movie.id} className="col-6 mb-4">
-              <MovieItem item={movie} />
+              <MovieItem item={movie} onRemove={this.onRemove} />
             </div>
           );
         })}

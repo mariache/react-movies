@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import MovieItem from "./MovieItem";
 import { API_URL, API_KEY_3 } from "../api/api";
+import MoviesTabs from "./MoviesTabs";
 
 export default class MoviesList extends Component {
   constructor() {
@@ -9,11 +10,12 @@ export default class MoviesList extends Component {
     this.state = {
       movies: [],
       watchLater: [],
+      sortBy: "popularity.desc",
     };
   }
 
   componentDidMount() {
-    const link = `${API_URL}/discover/movie?api_key=${API_KEY_3}&language=en-EN`;
+    const link = `${API_URL}/discover/movie?api_key=${API_KEY_3}&sort_by=${this.state.sortBy}&language=en-EN`;
     fetch(link)
       .then((response) => {
         return response.json();
@@ -44,10 +46,22 @@ export default class MoviesList extends Component {
     this.setState({ watchLater: watchedLater });
   };
 
+  updateSortBy = (value) => {
+    this.setState({ sortBy: value });
+  };
+
   render() {
     const { movies, watchLater } = this.state;
     return (
       <div className="container">
+        <div className="row mb-4">
+          <div className="col-12">
+            <MoviesTabs
+              sortBy={this.state.sortBy}
+              updateSortBy={this.updateSortBy}
+            />
+          </div>
+        </div>
         <div className="row">
           {movies.map((movie) => {
             return (

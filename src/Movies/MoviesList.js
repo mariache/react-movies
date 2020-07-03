@@ -14,7 +14,7 @@ export default class MoviesList extends Component {
     };
   }
 
-  componentDidMount() {
+  getMovies = () => {
     const link = `${API_URL}/discover/movie?api_key=${API_KEY_3}&sort_by=${this.state.sortBy}&language=en-EN`;
     fetch(link)
       .then((response) => {
@@ -25,6 +25,16 @@ export default class MoviesList extends Component {
           movies: data.results,
         });
       });
+  };
+
+  componentDidMount() {
+    this.getMovies();
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    if (prevState.sortBy !== this.state.sortBy) {
+      this.getMovies();
+    }
   }
 
   onRemove = (id) => {

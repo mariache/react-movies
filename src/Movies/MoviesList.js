@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import MovieItem from "./MovieItem";
 import { API_URL, API_KEY_3 } from "../api/api";
 import MoviesTabs from "./MoviesTabs";
+import { TransitionGroup, CSSTransition } from "react-transition-group";
 
 const useMoviesWatchLater = () => {
   const [watchLater, setWatchLater] = useState([]);
@@ -74,18 +75,22 @@ export const MoviesList = () => {
         </div>
       </div>
       <div className="row">
-        {movies.map((movie) => {
-          return (
-            <div key={movie.id} className="col-6 mb-4">
-              <MovieItem
-                item={movie}
-                onRemove={onRemove}
-                onWatchLater={onWatchLater}
-                onRemoveWatchLater={onRemoveWatchLater}
-              />
-            </div>
-          );
-        })}
+        <TransitionGroup component={null}>
+          {movies.map((movie) => {
+            return (
+              <CSSTransition key={movie.id} classNames="movies" timeout={500}>
+                <div className="col-6 mb-4 listMovies">
+                  <MovieItem
+                    item={movie}
+                    onRemove={onRemove}
+                    onWatchLater={onWatchLater}
+                    onRemoveWatchLater={onRemoveWatchLater}
+                  />
+                </div>
+              </CSSTransition>
+            );
+          })}
+        </TransitionGroup>
         <div className="col-3">
           <p>Will watch: {watchLater.length}</p>
         </div>

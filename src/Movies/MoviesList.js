@@ -21,22 +21,9 @@ const useMoviesWatchLater = () => {
   };
 };
 
-export const MoviesList = () => {
+const useMovies = () => {
   const [movies, setMovies] = useState([]);
-  const [sortBy, setSortBy] = useState("popularity.desc");
-
-  const {
-    watchLater,
-    onWatchLater,
-    onRemoveWatchLater,
-  } = useMoviesWatchLater();
-
-  useEffect(() => {
-    getMovies();
-    // eslint-disable-next-line
-  }, [sortBy]);
-
-  const getMovies = () => {
+  const getMovies = ({ sortBy }) => {
     const link = `${API_URL}/discover/movie?api_key=${API_KEY_3}&sort_by=${sortBy}&language=en-EN`;
     fetch(link)
       .then((response) => {
@@ -48,9 +35,32 @@ export const MoviesList = () => {
   };
 
   const onRemove = (id) => {
-    const updatedMovies = this.state.movies.slice().filter((x) => x.id !== id);
+    const updatedMovies = movies.slice().filter((x) => x.id !== id);
     setMovies(updatedMovies);
   };
+
+  return {
+    movies,
+    getMovies,
+    onRemove,
+  };
+};
+
+export const MoviesList = () => {
+  const [sortBy, setSortBy] = useState("popularity.desc");
+
+  const {
+    watchLater,
+    onWatchLater,
+    onRemoveWatchLater,
+  } = useMoviesWatchLater();
+
+  const { movies, getMovies, onRemove } = useMovies();
+
+  useEffect(() => {
+    getMovies({ sortBy });
+    // eslint-disable-next-line
+  }, [sortBy]);
 
   const updateSortBy = (value) => {
     setSortBy(value);

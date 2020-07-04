@@ -31,26 +31,22 @@ export const MovieItem = ({
         }`}
         alt="movie"
       />
-      <div className="card-body">
+      <div className="card-body card">
         <h6 className="card-title">{item.title}</h6>
         <div className="d-flex justify-content-between align-items-center">
           <p className="mb-0">Rating: {item.vote_average}</p>
           {watchLater ? (
-            <button
-              type="button"
-              className="btn btn-success"
+            <i
+              className="fa fa-bookmark"
+              style={{ cursor: "pointer", color: "#EAA221" }}
               onClick={onHandleRemoveWatchLater(item.id)}
-            >
-              Remove From Watch later
-            </button>
+            ></i>
           ) : (
-            <button
-              type="button"
-              className="btn btn-secondary"
+            <i
+              className="fa fa-bookmark-o"
+              style={{ cursor: "pointer" }}
               onClick={onHandleWatchLater(item)}
-            >
-              Watch later
-            </button>
+            ></i>
           )}
         </div>
         <button className="btn btn-danger" onClick={onHandleRemove(item.id)}>

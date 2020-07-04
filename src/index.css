@@ -12,13 +12,17 @@ code {
     monospace;
 }
 
+.card {
+  box-shadow: 5px 5px 10px hsla(0, 0%, 47.8%, 0.5);
+}
+
 .movies-exit-active {
   animation: movies 300ms ease-out forwards;
 }
 
 @keyframes movies {
   0% {
-    transform: translateX(0);
+    opacity: .7;
   }
 
   30% {

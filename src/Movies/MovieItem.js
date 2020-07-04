@@ -1,67 +1,64 @@
-import React from "react";
+import React, { useState } from "react";
 
-export default class MovieItem extends React.Component {
-  constructor() {
-    super();
+export const MovieItem = ({
+  item,
+  onRemove,
+  onWatchLater,
+  onRemoveWatchLater,
+}) => {
+  const [watchLater, setWatchLater] = useState(false);
 
-    this.state = {
-      watchLater: false,
-    };
-  }
+  const onHandleRemove = (id) => () => {
+    onRemove(id);
+  };
 
-  render() {
-    const { item, onRemove, onWatchLater, onRemoveWatchLater } = this.props;
+  const onHandleWatchLater = (item) => () => {
+    setWatchLater(true);
+    onWatchLater(item);
+  };
 
-    const onHandleRemove = (id) => () => {
-      onRemove(id);
-    };
+  const onHandleRemoveWatchLater = (id) => () => {
+    setWatchLater(false);
+    onRemoveWatchLater(id);
+  };
 
-    const onHandleWatchLater = (item) => () => {
-      this.setState({ watchLater: true });
-      onWatchLater(item);
-    };
-
-    const onHandleRemoveWatchLater = (id) => () => {
-      this.setState({ watchLater: false });
-      onRemoveWatchLater(id);
-    };
-
-    return (
-      <div className="card" style={{ width: "100%" }}>
-        <img
-          className="card-img-top card-img--height"
-          src={`https://image.tmdb.org/t/p/w500${
-            item.backdrop_path || item.poster_path
-          }`}
-          alt="movie"
-        />
-        <div className="card-body">
-          <h6 className="card-title">{item.title}</h6>
-          <div className="d-flex justify-content-between align-items-center">
-            <p className="mb-0">Rating: {item.vote_average}</p>
-            {this.state.watchLater ? (
-              <button
-                type="button"
-                className="btn btn-success"
-                onClick={onHandleRemoveWatchLater(item.id)}
-              >
-                Remove From Watch later
-              </button>
-            ) : (
-              <button
-                type="button"
-                className="btn btn-secondary"
-                onClick={onHandleWatchLater(item)}
-              >
-                Watch later
-              </button>
-            )}
-          </div>
-          <button className="btn btn-danger" onClick={onHandleRemove(item.id)}>
-            Delete
-          </button>
+  return (
+    <div className="card" style={{ width: "100%" }}>
+      <img
+        className="card-img-top card-img--height"
+        src={`https://image.tmdb.org/t/p/w500${
+          item.backdrop_path || item.poster_path
+        }`}
+        alt="movie"
+      />
+      <div className="card-body">
+        <h6 className="card-title">{item.title}</h6>
+        <div className="d-flex justify-content-between align-items-center">
+          <p className="mb-0">Rating: {item.vote_average}</p>
+          {watchLater ? (
+            <button
+              type="button"
+              className="btn btn-success"
+              onClick={onHandleRemoveWatchLater(item.id)}
+            >
+              Remove From Watch later
+            </button>
+          ) : (
+            <button
+              type="button"
+              className="btn btn-secondary"
+              onClick={onHandleWatchLater(item)}
+            >
+              Watch later
+            </button>
+          )}
         </div>
+        <button className="btn btn-danger" onClick={onHandleRemove(item.id)}>
+          Delete
+        </button>
       </div>
-    );
-  }
-}
+    </div>
+  );
+};
+
+export default MovieItem;

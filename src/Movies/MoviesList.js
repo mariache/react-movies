@@ -3,10 +3,38 @@ import MovieItem from "./MovieItem";
 import { API_URL, API_KEY_3 } from "../api/api";
 import MoviesTabs from "./MoviesTabs";
 
+const useMoviesWatchLater = () => {
+  const [watchLater, setWatchLater] = useState([]);
+  const onWatchLater = (movie) => {
+    const watchedLater = [...watchLater, movie];
+    setWatchLater(watchedLater);
+  };
+
+  const onRemoveWatchLater = (id) => {
+    const watchedLater = watchLater.slice().filter((x) => x.id !== id);
+    setWatchLater(watchedLater);
+  };
+  return {
+    watchLater,
+    onWatchLater,
+    onRemoveWatchLater,
+  };
+};
+
 export const MoviesList = () => {
   const [movies, setMovies] = useState([]);
-  const [watchLater, setWatchLater] = useState([]);
   const [sortBy, setSortBy] = useState("popularity.desc");
+
+  const {
+    watchLater,
+    onWatchLater,
+    onRemoveWatchLater,
+  } = useMoviesWatchLater();
+
+  useEffect(() => {
+    getMovies();
+    // eslint-disable-next-line
+  }, [sortBy]);
 
   const getMovies = () => {
     const link = `${API_URL}/discover/movie?api_key=${API_KEY_3}&sort_by=${sortBy}&language=en-EN`;
@@ -19,23 +47,9 @@ export const MoviesList = () => {
       });
   };
 
-  useEffect(() => {
-    getMovies();
-  }, []);
-
   const onRemove = (id) => {
     const updatedMovies = this.state.movies.slice().filter((x) => x.id !== id);
     setMovies(updatedMovies);
-  };
-
-  const onWatchLater = (movie) => {
-    const watchedLater = [...watchLater, movie];
-    setWatchLater(watchedLater);
-  };
-
-  const onRemoveWatchLater = (id) => {
-    const watchedLater = watchLater.slice().filter((x) => x.id !== id);
-    setWatchLater(watchedLater);
   };
 
   const updateSortBy = (value) => {

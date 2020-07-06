@@ -1,7 +1,6 @@
 import React from "react";
 import MovieItem from "./MovieItem";
 
-import MoviesTabs from "./MoviesTabs";
 import { TransitionGroup, CSSTransition } from "react-transition-group";
 
 export const MoviesList = ({
@@ -15,11 +14,6 @@ export const MoviesList = ({
 }) => {
   return (
     <div className="container">
-      <div className="row mb-4">
-        <div className="col-12">
-          <MoviesTabs sortBy={sortBy} updateSortBy={updateSortBy} />
-        </div>
-      </div>
       <div className="row">
         <TransitionGroup component={null}>
           {movies.map((movie) => {

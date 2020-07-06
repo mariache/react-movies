@@ -1,11 +1,15 @@
 import React from "react";
 
-export const Filters = (props) => {
+export const Filters = ({ updateSortBy }) => {
   return (
     <form className="mb-3">
       <div className="form-group">
         <label htmlFor="sort_by">Order by:</label>
-        <select className="form-control" id="sort_by">
+        <select
+          className="form-control"
+          id="sort_by"
+          onChange={(e) => updateSortBy(e.target.value)}
+        >
           <option value="popularity.desc">Popularity desc</option>
           <option value="popularity.asc">Popularity asc</option>
           <option value="vote_average.desc">Rating desc</option>

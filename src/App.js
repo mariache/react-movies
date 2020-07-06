@@ -72,7 +72,7 @@ export const App = () => {
           <div className="card" style={{ width: "100%" }}>
             <div className="card-body">
               <h3>Filters:</h3>
-              <Filters />
+              <Filters updateSortBy={updateSortBy} />
             </div>
           </div>
         </div>

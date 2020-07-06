@@ -5,7 +5,6 @@ import { TransitionGroup, CSSTransition } from "react-transition-group";
 
 export const MoviesList = ({
   movies,
-  sortBy,
   updateSortBy,
   onRemove,
   onRemoveWatchLater,
@@ -19,7 +18,7 @@ export const MoviesList = ({
           {movies.map((movie) => {
             return (
               <CSSTransition key={movie.id} classNames="movies" timeout={500}>
-                <div className="col-6 mb-4 listMovies">
+                <div className="col-6 mb-4">
                   <MovieItem
                     item={movie}
                     onRemove={onRemove}

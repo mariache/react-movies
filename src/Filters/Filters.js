@@ -10,10 +10,15 @@ export const Filters = ({ updateSortBy }) => {
           id="sort_by"
           onChange={(e) => updateSortBy(e.target.value)}
         >
-          <option value="popularity.desc">Popularity desc</option>
-          <option value="popularity.asc">Popularity asc</option>
-          <option value="vote_average.desc">Rating desc</option>
-          <option value="vote_average.asc">Rating asc</option>
+          <option value="popularity.desc">Popularity Descending</option>
+          <option value="popularity.asc">Popularity Ascending</option>
+          <option value="vote_average.desc">Rating Descending</option>
+          <option value="vote_average.asc">Rating Ascending</option>
+          <option value="now_playing">Now Playing</option>
+          <option value="upcoming">Upcoming</option>
+          {/*@TODO*/
+          /* <option value="vote_average.desc">Release Date Descending</option>
+          <option value="vote_average.desc">Release Date Ascending</option> */}
         </select>
       </div>
     </form>

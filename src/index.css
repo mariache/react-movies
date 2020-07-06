@@ -27,8 +27,6 @@ code {
   height: 278px;
 }
 
-
-
 .card-movie {
   display: flex;
   padding: 0 !important;
@@ -42,6 +40,7 @@ code {
 .card-movie__description {
   padding: 10px 15px;
   position: relative;
+  width: -webkit-fill-available;
 }
 
 .card-movie__name {

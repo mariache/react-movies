@@ -24,7 +24,7 @@ export const MovieItem = ({
   };
 
   return (
-    <div className="card" style={{ width: "100%" }}>
+    <div className="card">
       <div className="card-body card-movie">
         <div className="card-movie__img">
           <img
@@ -36,12 +36,12 @@ export const MovieItem = ({
                   }`
                 : defaultImage
             }
+            width="100%"
             alt="movie"
           />
         </div>
         <div className="card-movie__description">
-          <h6 className="card-title">{item.title}</h6>
-          <div className="d-flex justify-content-between align-items-center">
+          <div className="card-movie__icons d-flex justify-content-between">
             <p className="mb-0">Rating: {item.vote_average}</p>
             {watchLater ? (
               <i
@@ -57,9 +57,15 @@ export const MovieItem = ({
               ></i>
             )}
           </div>
-          <button className="btn btn-danger" onClick={onHandleRemove(item.id)}>
-            Delete
-          </button>
+          <h6 className="card-title card-movie__name">{item.title}</h6>
+          <div className="card-movie__details">
+            <button
+              className="btn btn-danger"
+              onClick={onHandleRemove(item.id)}
+            >
+              Delete
+            </button>
+          </div>
         </div>
       </div>
     </div>

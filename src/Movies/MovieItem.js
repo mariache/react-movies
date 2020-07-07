@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import defaultImage from "../assets/images/default-image.png";
 import RatingProgressBar from "../components/RatingProgressBar";
+import moment from "moment";
 
 export const MovieItem = ({
   item,
@@ -46,7 +47,9 @@ export const MovieItem = ({
           <button className="btn btn-danger" onClick={onHandleRemove(id)}>
             Delete
           </button>
-          <h6 className="card-title card-movie__name">{title}</h6>
+          <h6 className="card-title card-movie__name">
+            {title}({moment(item.release_date, "YYYY-MM-DD").format("YYYY")})
+          </h6>
           <div className="card-movie__details">
             <div className="card-movie__icons d-flex justify-content-between">
               <div style={{ width: 40 }}>

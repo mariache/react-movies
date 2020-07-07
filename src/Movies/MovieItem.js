@@ -32,7 +32,7 @@ export const MovieItem = ({
             src={
               item.poster_path !== null
                 ? `https://image.tmdb.org/t/p/w500${
-                    item.backdrop_path || item.poster_path
+                    item.poster_path || item.backdrop_path
                   }`
                 : defaultImage
             }

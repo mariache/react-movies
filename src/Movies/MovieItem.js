@@ -1,8 +1,11 @@
 import React, { useState } from "react";
 import defaultImage from "../assets/images/default-image.png";
+import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
+import "react-circular-progressbar/dist/styles.css";
 
 export const MovieItem = ({
   item,
+  item: { vote_average, poster_path, backdrop_path, id, title },
   onRemove,
   onWatchLater,
   onRemoveWatchLater,
@@ -23,6 +26,9 @@ export const MovieItem = ({
     onRemoveWatchLater(id);
   };
 
+  const percentage = vote_average * 10;
+  const color = percentage > 70 ? "#21D07A" : "#switch";
+
   return (
     <div className="card">
       <div className="card-body card-movie">
@@ -30,9 +36,9 @@ export const MovieItem = ({
           <img
             className="card-img-top card-img--height"
             src={
-              item.poster_path !== null
+              poster_path !== null
                 ? `https://image.tmdb.org/t/p/w500${
-                    item.poster_path || item.backdrop_path
+                    poster_path || backdrop_path
                   }`
                 : defaultImage
             }
@@ -42,12 +48,25 @@ export const MovieItem = ({
         </div>
         <div className="card-movie__description">
           <div className="card-movie__icons d-flex justify-content-between">
-            <p className="mb-0">Rating: {item.vote_average}</p>
+            <p className="mb-0">
+              <CircularProgressbar
+                value={percentage}
+                text={`${percentage}%`}
+                background
+                backgroundPadding={6}
+                styles={buildStyles({
+                  backgroundColor: "#081c24",
+                  textColor: "#fff",
+                  pathColor: color,
+                  trailColor: "transparent",
+                })}
+              />
+            </p>
             {watchLater ? (
               <i
                 className="fa fa-bookmark"
                 style={{ cursor: "pointer", color: "#EAA221" }}
-                onClick={onHandleRemoveWatchLater(item.id)}
+                onClick={onHandleRemoveWatchLater(id)}
               ></i>
             ) : (
               <i
@@ -57,12 +76,9 @@ export const MovieItem = ({
               ></i>
             )}
           </div>
-          <h6 className="card-title card-movie__name">{item.title}</h6>
+          <h6 className="card-title card-movie__name">{title}</h6>
           <div className="card-movie__details">
-            <button
-              className="btn btn-danger"
-              onClick={onHandleRemove(item.id)}
-            >
+            <button className="btn btn-danger" onClick={onHandleRemove(id)}>
               Delete
             </button>
           </div>

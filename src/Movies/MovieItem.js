@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import defaultImage from "../assets/images/default-image.png";
-import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
-import "react-circular-progressbar/dist/styles.css";
+import RatingProgressBar from "../components/RatingProgressBar";
 
 export const MovieItem = ({
   item,
@@ -26,9 +25,6 @@ export const MovieItem = ({
     onRemoveWatchLater(id);
   };
 
-  const percentage = vote_average * 10;
-  const color = percentage > 70 ? "#21D07A" : "#switch";
-
   return (
     <div className="card">
       <div className="card-body card-movie">
@@ -48,20 +44,7 @@ export const MovieItem = ({
         </div>
         <div className="card-movie__description">
           <div className="card-movie__icons d-flex justify-content-between">
-            <p className="mb-0">
-              <CircularProgressbar
-                value={percentage}
-                text={`${percentage}%`}
-                background
-                backgroundPadding={6}
-                styles={buildStyles({
-                  backgroundColor: "#081c24",
-                  textColor: "#fff",
-                  pathColor: color,
-                  trailColor: "transparent",
-                })}
-              />
-            </p>
+            <RatingProgressBar vote_average={vote_average} />
             {watchLater ? (
               <i
                 className="fa fa-bookmark"

@@ -16,9 +16,12 @@ export const Filters = ({ updateSortBy }) => {
           <option value="vote_average.asc">Rating Ascending</option>
           <option value="now_playing">Now Playing</option>
           <option value="upcoming">Upcoming</option>
-          {/*@TODO*/
-          /* <option value="vote_average.desc">Release Date Descending</option>
-          <option value="vote_average.desc">Release Date Ascending</option> */}
+          <option value="primary_release_date.desc">
+            Release Date Descending
+          </option>
+          <option value="primary_release_date.asc">
+            Release Date Ascending
+          </option>
         </select>
       </div>
     </form>

@@ -11,7 +11,7 @@ const useMoviesWatchLater = () => {
   };
 
   const onRemoveWatchLater = (id) => {
-    const watchedLater = watchLater.slice().filter((x) => x.id !== id);
+    const watchedLater = watchLater.filter((x) => x.id !== id);
     setWatchLater(watchedLater);
   };
   return {
@@ -65,6 +65,7 @@ export const App = () => {
   const updateSortBy = (value) => {
     setSortBy(value);
   };
+
   return (
     <div className="container">
       <div className="row mt-4">

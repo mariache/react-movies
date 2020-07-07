@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import defaultImage from "../assets/images/default-image.png";
 import RatingProgressBar from "../components/RatingProgressBar";
 import moment from "moment";
+import Image from "components/Image";
 
 export const MovieItem = ({
   item,
@@ -30,25 +30,17 @@ export const MovieItem = ({
     <div className="card">
       <div className="card-body card-movie">
         <div className="card-movie__img">
-          <img
-            className="card-img-top card-img--height"
-            src={
-              poster_path !== null
-                ? `https://image.tmdb.org/t/p/w500${
-                    poster_path || backdrop_path
-                  }`
-                : defaultImage
-            }
-            width="100%"
-            alt="movie"
-          />
+          <Image poster_path={poster_path} backdrop_path={backdrop_path} />
         </div>
         <div className="card-movie__description">
           <button className="btn btn-danger" onClick={onHandleRemove(id)}>
             Delete
           </button>
           <h6 className="card-title card-movie__name">
-            {title}({moment(item.release_date, "YYYY-MM-DD").format("YYYY")})
+            {title}
+            {item.release_date
+              ? `(${moment(item.release_date, "YYYY-MM-DD").format("YYYY")})`
+              : ""}
           </h6>
           <div className="card-movie__details">
             <div className="card-movie__icons d-flex justify-content-between">

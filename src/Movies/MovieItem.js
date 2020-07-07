@@ -43,27 +43,33 @@ export const MovieItem = ({
           />
         </div>
         <div className="card-movie__description">
-          <div className="card-movie__icons d-flex justify-content-between">
-            <RatingProgressBar vote_average={vote_average} />
-            {watchLater ? (
-              <i
-                className="fa fa-bookmark"
-                style={{ cursor: "pointer", color: "#EAA221" }}
-                onClick={onHandleRemoveWatchLater(id)}
-              ></i>
-            ) : (
-              <i
-                className="fa fa-bookmark-o"
-                style={{ cursor: "pointer" }}
-                onClick={onHandleWatchLater(item)}
-              ></i>
-            )}
-          </div>
+          <button className="btn btn-danger" onClick={onHandleRemove(id)}>
+            Delete
+          </button>
           <h6 className="card-title card-movie__name">{title}</h6>
           <div className="card-movie__details">
-            <button className="btn btn-danger" onClick={onHandleRemove(id)}>
-              Delete
-            </button>
+            <div className="card-movie__icons d-flex justify-content-between">
+              <div style={{ width: 40 }}>
+                <RatingProgressBar vote_average={vote_average} />
+              </div>
+              <i
+                className="fa fa-star-o"
+                style={{ cursor: "pointer", color: "#081c24" }}
+              ></i>
+              {watchLater ? (
+                <i
+                  className="fa fa-bookmark"
+                  style={{ cursor: "pointer", color: "#E94F37" }}
+                  onClick={onHandleRemoveWatchLater(id)}
+                ></i>
+              ) : (
+                <i
+                  className="fa fa-bookmark-o"
+                  style={{ cursor: "pointer", color: "#081c24" }}
+                  onClick={onHandleWatchLater(item)}
+                ></i>
+              )}
+            </div>
           </div>
         </div>
       </div>

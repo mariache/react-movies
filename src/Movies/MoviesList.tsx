@@ -3,9 +3,24 @@ import MovieItem from "./MovieItem";
 
 import { TransitionGroup, CSSTransition } from "react-transition-group";
 
-export const MoviesList = ({
+export interface MovieItem {
+  vote_average: string;
+  poster_path: string;
+  backdrop_path: string;
+  id: string;
+  title: string;
+}
+
+export type MoviesListProps = {
+  movies: Array<MovieItem>;
+  onRemove: (id: string) => void;
+  onRemoveWatchLater: (id: string) => void;
+  onWatchLater: (item: MovieItem) => void;
+  watchLater: Array<MovieItem>;
+};
+
+export const MoviesList: React.FunctionComponent<MoviesListProps> = ({
   movies,
-  updateSortBy,
   onRemove,
   onRemoveWatchLater,
   onWatchLater,

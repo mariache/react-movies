@@ -4,7 +4,7 @@ import MovieItem from "./MovieItem";
 import { TransitionGroup, CSSTransition } from "react-transition-group";
 
 export interface MovieItem {
-  vote_average: string;
+  vote_average: number;
   poster_path: string;
   backdrop_path: string;
   id: string;

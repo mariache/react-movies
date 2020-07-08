@@ -2,10 +2,18 @@ import React, { useState } from "react";
 import RatingProgressBar from "../components/RatingProgressBar";
 import moment from "moment";
 import Image from "components/Image";
+import { MovieItemType } from "./MoviesList";
 
-export const MovieItem = ({
+export type MovieItemProps = {
+  item: MovieItemType;
+  onRemove: (id: any) => void;
+  onWatchLater: (item: MovieItemType) => void;
+  onRemoveWatchLater: (id: string) => void;
+};
+
+export const MovieItem: React.FunctionComponent<MovieItemProps> = ({
   item,
-  item: { vote_average, poster_path, backdrop_path, id, title },
+  item: { release_date, vote_average, poster_path, backdrop_path, id, title },
   onRemove,
   onWatchLater,
   onRemoveWatchLater,
@@ -16,12 +24,12 @@ export const MovieItem = ({
     onRemove(id);
   };
 
-  const onHandleWatchLater = (item) => () => {
+  const onHandleWatchLater = (item: MovieItemType) => () => {
     setWatchLater(true);
     onWatchLater(item);
   };
 
-  const onHandleRemoveWatchLater = (id) => () => {
+  const onHandleRemoveWatchLater = (id: string) => () => {
     setWatchLater(false);
     onRemoveWatchLater(id);
   };
@@ -38,8 +46,8 @@ export const MovieItem = ({
           </button>
           <h6 className="card-title card-movie__name">
             {title}
-            {item.release_date
-              ? `(${moment(item.release_date, "YYYY-MM-DD").format("YYYY")})`
+            {release_date
+              ? `(${moment(release_date, "YYYY-MM-DD").format("YYYY")})`
               : ""}
           </h6>
           <div className="card-movie__details">

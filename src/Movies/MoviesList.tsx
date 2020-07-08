@@ -3,8 +3,9 @@ import MovieItem from "./MovieItem";
 
 import { TransitionGroup, CSSTransition } from "react-transition-group";
 
-export interface MovieItem {
+export interface MovieItemType {
   vote_average: number;
+  release_date: Date;
   poster_path: string;
   backdrop_path: string;
   id: string;
@@ -12,11 +13,11 @@ export interface MovieItem {
 }
 
 export type MoviesListProps = {
-  movies: Array<MovieItem>;
+  movies: Array<MovieItemType>;
   onRemove: (id: string) => void;
   onRemoveWatchLater: (id: string) => void;
-  onWatchLater: (item: MovieItem) => void;
-  watchLater: Array<MovieItem>;
+  onWatchLater: (item: MovieItemType) => void;
+  watchLater: Array<MovieItemType>;
 };
 
 export const MoviesList: React.FunctionComponent<MoviesListProps> = ({

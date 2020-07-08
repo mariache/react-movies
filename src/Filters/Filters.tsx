@@ -1,6 +1,12 @@
 import React from "react";
 
-export const Filters = ({ updateSortBy }) => {
+export type FiltersProps = {
+  updateSortBy: (value: string) => void;
+};
+
+export const Filters: React.FunctionComponent<FiltersProps> = ({
+  updateSortBy,
+}) => {
   return (
     <form className="mb-3">
       <div className="form-group">

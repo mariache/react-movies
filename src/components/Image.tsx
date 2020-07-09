@@ -12,7 +12,7 @@ export const Image: React.FunctionComponent<ImageProps> = ({
 }) => {
   return (
     <img
-      className="card-img-top card-img--height"
+      className="card-img-top card-img--height image"
       src={
         poster_path !== null
           ? `https://image.tmdb.org/t/p/w500${poster_path || backdrop_path}`

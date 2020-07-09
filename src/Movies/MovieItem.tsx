@@ -53,8 +53,13 @@ export const MovieItem: React.FunctionComponent<MovieItemProps> = ({
   return (
     <div className="card">
       <div className="card-body card-movie">
-        <div className="card-movie__img">
+        <div className="card-movie__img img-container">
           <Image poster_path={poster_path} backdrop_path={backdrop_path} />
+          <div className="btn-container">
+            <button className="btn btn-success btn-container__button">
+              More
+            </button>
+          </div>
         </div>
         <div className="card-movie__description">
           <button className="btn btn-danger" onClick={onHandleRemove(id)}>

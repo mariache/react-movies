@@ -18,6 +18,9 @@ export type MoviesListProps = {
   onRemoveWatchLater: (id: string) => void;
   onWatchLater: (item: MovieItemType) => void;
   watchLater: Array<MovieItemType>;
+  favoriteList: Array<MovieItemType>;
+  onFavorite: (item: MovieItemType) => void;
+  onRemoveFromFavorite: (id: string) => void;
 };
 
 export const MoviesList: React.FunctionComponent<MoviesListProps> = ({
@@ -26,6 +29,9 @@ export const MoviesList: React.FunctionComponent<MoviesListProps> = ({
   onRemoveWatchLater,
   onWatchLater,
   watchLater,
+  favoriteList,
+  onFavorite,
+  onRemoveFromFavorite,
 }) => {
   return (
     <div className="container">
@@ -40,6 +46,8 @@ export const MoviesList: React.FunctionComponent<MoviesListProps> = ({
                     onRemove={onRemove}
                     onWatchLater={onWatchLater}
                     onRemoveWatchLater={onRemoveWatchLater}
+                    onFavorite={onFavorite}
+                    onRemoveFromFavorite={onRemoveFromFavorite}
                   />
                 </div>
               </CSSTransition>
@@ -48,6 +56,7 @@ export const MoviesList: React.FunctionComponent<MoviesListProps> = ({
         </TransitionGroup>
         <div className="col-3">
           <p>Will watch: {watchLater.length}</p>
+          <p>Favorite: {favoriteList.length}</p>
         </div>
       </div>
     </div>

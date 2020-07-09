@@ -9,6 +9,8 @@ export type MovieItemProps = {
   onRemove: (id: any) => void;
   onWatchLater: (item: MovieItemType) => void;
   onRemoveWatchLater: (id: string) => void;
+  onFavorite: (item: MovieItemType) => void;
+  onRemoveFromFavorite: (id: string) => void;
 };
 
 export const MovieItem: React.FunctionComponent<MovieItemProps> = ({
@@ -17,8 +19,11 @@ export const MovieItem: React.FunctionComponent<MovieItemProps> = ({
   onRemove,
   onWatchLater,
   onRemoveWatchLater,
+  onFavorite,
+  onRemoveFromFavorite,
 }) => {
   const [watchLater, setWatchLater] = useState(false);
+  const [favorite, setFavorite] = useState(false);
 
   const onHandleRemove = (id) => () => {
     onRemove(id);
@@ -32,6 +37,16 @@ export const MovieItem: React.FunctionComponent<MovieItemProps> = ({
   const onHandleRemoveWatchLater = (id: string) => () => {
     setWatchLater(false);
     onRemoveWatchLater(id);
+  };
+
+  const onHandleFavorite = (item: MovieItemType) => () => {
+    setFavorite(true);
+    onFavorite(item);
+  };
+
+  const onHandleRemoveFavorite = (id: string) => () => {
+    setFavorite(false);
+    onRemoveFromFavorite(id);
   };
 
   return (
@@ -55,10 +70,19 @@ export const MovieItem: React.FunctionComponent<MovieItemProps> = ({
               <div style={{ width: 40 }}>
                 <RatingProgressBar vote_average={vote_average} />
               </div>
-              <i
-                className="fa fa-star-o"
-                style={{ cursor: "pointer", color: "#081c24" }}
-              ></i>
+              {favorite ? (
+                <i
+                  className="fa fa-star"
+                  style={{ cursor: "pointer", color: "#E94F37" }}
+                  onClick={onHandleRemoveFavorite(id)}
+                ></i>
+              ) : (
+                <i
+                  className="fa fa-star-o"
+                  style={{ cursor: "pointer", color: "#081c24" }}
+                  onClick={onHandleFavorite(item)}
+                ></i>
+              )}
               {watchLater ? (
                 <i
                   className="fa fa-bookmark"

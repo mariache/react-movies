@@ -12,7 +12,7 @@ const RatingProgressBar: React.FunctionComponent<RatingProgressBarProps> = ({
 }) => {
   const percentage = vote_average * 10;
   const color: string =
-    percentage > 70
+    percentage >= 70
       ? appTheme.palette.green
       : percentage > 50 && percentage < 70
       ? appTheme.palette.yellow

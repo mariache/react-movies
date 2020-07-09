@@ -52,15 +52,9 @@ const useMovies = () => {
       });
   };
 
-  const onRemove = (id: string) => {
-    const updatedMovies = movies.slice().filter((x) => x.id !== id);
-    setMovies(updatedMovies);
-  };
-
   return {
     movies,
     getMovies,
-    onRemove,
   };
 };
 
@@ -79,7 +73,7 @@ export const App: React.FunctionComponent = () => {
     onRemoveFromFavorite,
   } = useMoviesFavorite();
 
-  const { movies, getMovies, onRemove } = useMovies();
+  const { movies, getMovies } = useMovies();
 
   useEffect(() => {
     getMovies({ sortBy });
@@ -104,7 +98,6 @@ export const App: React.FunctionComponent = () => {
         <div className="col-9">
           <MoviesList
             movies={movies}
-            onRemove={onRemove}
             onRemoveWatchLater={onRemoveWatchLater}
             onWatchLater={onWatchLater}
             watchLater={watchLater}

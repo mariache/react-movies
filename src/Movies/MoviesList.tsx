@@ -14,7 +14,6 @@ export interface MovieItemType {
 
 export type MoviesListProps = {
   movies: Array<MovieItemType>;
-  onRemove: (id: string) => void;
   onRemoveWatchLater: (id: string) => void;
   onWatchLater: (item: MovieItemType) => void;
   watchLater: Array<MovieItemType>;
@@ -25,7 +24,6 @@ export type MoviesListProps = {
 
 export const MoviesList: React.FunctionComponent<MoviesListProps> = ({
   movies,
-  onRemove,
   onRemoveWatchLater,
   onWatchLater,
   watchLater,
@@ -43,7 +41,6 @@ export const MoviesList: React.FunctionComponent<MoviesListProps> = ({
                 <div className="col-6 mb-4">
                   <MovieItem
                     item={movie}
-                    onRemove={onRemove}
                     onWatchLater={onWatchLater}
                     onRemoveWatchLater={onRemoveWatchLater}
                     onFavorite={onFavorite}

@@ -7,7 +7,6 @@ import { appTheme } from "appTheme";
 
 export type MovieItemProps = {
   item: MovieItemType;
-  onRemove: (id: any) => void;
   onWatchLater: (item: MovieItemType) => void;
   onRemoveWatchLater: (id: string) => void;
   onFavorite: (item: MovieItemType) => void;
@@ -17,7 +16,7 @@ export type MovieItemProps = {
 export const MovieItem: React.FunctionComponent<MovieItemProps> = ({
   item,
   item: { release_date, vote_average, poster_path, backdrop_path, id, title },
-  onRemove,
+
   onWatchLater,
   onRemoveWatchLater,
   onFavorite,
@@ -25,10 +24,6 @@ export const MovieItem: React.FunctionComponent<MovieItemProps> = ({
 }) => {
   const [watchLater, setWatchLater] = useState(false);
   const [favorite, setFavorite] = useState(false);
-
-  const onHandleRemove = (id) => () => {
-    onRemove(id);
-  };
 
   const onHandleWatchLater = (item: MovieItemType) => () => {
     setWatchLater(true);
@@ -62,9 +57,6 @@ export const MovieItem: React.FunctionComponent<MovieItemProps> = ({
           </div>
         </div>
         <div className="card-movie__description">
-          <button className="btn btn-danger" onClick={onHandleRemove(id)}>
-            Delete
-          </button>
           <h6 className="card-title card-movie__name">
             {title}
             {release_date

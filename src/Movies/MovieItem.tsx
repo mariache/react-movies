@@ -3,6 +3,7 @@ import RatingProgressBar from "../components/RatingProgressBar";
 import moment from "moment";
 import Image from "components/Image";
 import { MovieItemType } from "./MoviesList";
+import { appTheme } from "appTheme";
 
 export type MovieItemProps = {
   item: MovieItemType;
@@ -73,26 +74,26 @@ export const MovieItem: React.FunctionComponent<MovieItemProps> = ({
               {favorite ? (
                 <i
                   className="fa fa-star"
-                  style={{ cursor: "pointer", color: "#E94F37" }}
+                  style={{ cursor: "pointer", color: appTheme.palette.gold }}
                   onClick={onHandleRemoveFavorite(id)}
                 ></i>
               ) : (
                 <i
                   className="fa fa-star-o"
-                  style={{ cursor: "pointer", color: "#081c24" }}
+                  style={{ cursor: "pointer", color: appTheme.palette.dark }}
                   onClick={onHandleFavorite(item)}
                 ></i>
               )}
               {watchLater ? (
                 <i
                   className="fa fa-bookmark"
-                  style={{ cursor: "pointer", color: "#E94F37" }}
+                  style={{ cursor: "pointer", color: appTheme.palette.red }}
                   onClick={onHandleRemoveWatchLater(id)}
                 ></i>
               ) : (
                 <i
                   className="fa fa-bookmark-o"
-                  style={{ cursor: "pointer", color: "#081c24" }}
+                  style={{ cursor: "pointer", color: appTheme.palette.dark }}
                   onClick={onHandleWatchLater(item)}
                 ></i>
               )}

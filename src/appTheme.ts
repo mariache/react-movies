@@ -6,6 +6,7 @@ export const appTheme = {
     green: "#21D07A",
     yellow: "#D0D331",
     red: "#E94F37",
+    gold: "#F2C744",
     white: "#FFFFFF",
     transparent: "transparent",
   },

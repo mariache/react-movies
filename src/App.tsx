@@ -21,6 +21,24 @@ const useMoviesWatchLater = () => {
   };
 };
 
+const useMoviesFavorite = () => {
+  const [favoriteList, setFavoriteList] = useState<MovieItemType[]>([]);
+  const onFavorite = (movie: MovieItemType) => {
+    const favorite = [...favoriteList, movie];
+    setFavoriteList(favorite);
+  };
+
+  const onRemoveFromFavorite = (id: string) => {
+    const favorite = favoriteList.filter((x) => x.id !== id);
+    setFavoriteList(favorite);
+  };
+  return {
+    favoriteList,
+    onFavorite,
+    onRemoveFromFavorite,
+  };
+};
+
 const useMovies = () => {
   const [movies, setMovies] = useState<MovieItemType[]>([]);
   const getMovies = ({ sortBy }) => {
@@ -46,7 +64,7 @@ const useMovies = () => {
   };
 };
 
-export const App: React.FunctionComponent = (props) => {
+export const App: React.FunctionComponent = () => {
   const [sortBy, setSortBy] = useState("popularity.desc");
 
   const {
@@ -54,6 +72,12 @@ export const App: React.FunctionComponent = (props) => {
     onWatchLater,
     onRemoveWatchLater,
   } = useMoviesWatchLater();
+
+  const {
+    favoriteList,
+    onFavorite,
+    onRemoveFromFavorite,
+  } = useMoviesFavorite();
 
   const { movies, getMovies, onRemove } = useMovies();
 
@@ -84,6 +108,9 @@ export const App: React.FunctionComponent = (props) => {
             onRemoveWatchLater={onRemoveWatchLater}
             onWatchLater={onWatchLater}
             watchLater={watchLater}
+            favoriteList={favoriteList}
+            onFavorite={onFavorite}
+            onRemoveFromFavorite={onRemoveFromFavorite}
           />
         </div>
       </div>

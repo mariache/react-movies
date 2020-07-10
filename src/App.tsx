@@ -3,6 +3,7 @@ import Filters from "./Filters/Filters";
 import MoviesList, { MovieItemType } from "./Movies/MoviesList";
 import { API_URL, API_KEY_3 } from "./api/api";
 import Spinner from "components/Spinner";
+import axios from "axios";
 
 const useMoviesWatchLater = () => {
   const [watchLater, setWatchLater] = useState<MovieItemType[]>([]);
@@ -43,16 +44,11 @@ const useMoviesFavorite = () => {
 const useMovies = () => {
   const [movies, setMovies] = useState<MovieItemType[]>([]);
   const [loading, setLoading] = useState(false);
-  const getMovies = ({ sortBy }) => {
+  const getMovies = async ({ sortBy }) => {
     setLoading(true);
     const link = `${API_URL}/discover/movie?api_key=${API_KEY_3}&sort_by=${sortBy}&language=en-EN`;
-    fetch(link)
-      .then((response) => {
-        return response.json();
-      })
-      .then((data) => {
-        setMovies(data.results);
-      });
+    const res = await axios.get(link);
+    setMovies(res.data.results);
     setLoading(false);
   };
 

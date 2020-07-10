@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import Filters from "./Filters/Filters";
 import MoviesList, { MovieItemType } from "./Movies/MoviesList";
 import { API_URL, API_KEY_3 } from "./api/api";
+import Spinner from "components/Spinner";
 
 const useMoviesWatchLater = () => {
   const [watchLater, setWatchLater] = useState<MovieItemType[]>([]);
@@ -100,15 +101,19 @@ export const App: React.FunctionComponent = () => {
           </div>
         </div>
         <div className="col-9">
-          <MoviesList
-            movies={movies}
-            onRemoveWatchLater={onRemoveWatchLater}
-            onWatchLater={onWatchLater}
-            watchLater={watchLater}
-            favoriteList={favoriteList}
-            onFavorite={onFavorite}
-            onRemoveFromFavorite={onRemoveFromFavorite}
-          />
+          {loading ? (
+            <Spinner />
+          ) : (
+            <MoviesList
+              movies={movies}
+              onRemoveWatchLater={onRemoveWatchLater}
+              onWatchLater={onWatchLater}
+              watchLater={watchLater}
+              favoriteList={favoriteList}
+              onFavorite={onFavorite}
+              onRemoveFromFavorite={onRemoveFromFavorite}
+            />
+          )}
         </div>
       </div>
     </div>

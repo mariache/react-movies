@@ -41,7 +41,9 @@ const useMoviesFavorite = () => {
 
 const useMovies = () => {
   const [movies, setMovies] = useState<MovieItemType[]>([]);
+  const [loading, setLoading] = useState(false);
   const getMovies = ({ sortBy }) => {
+    setLoading(true);
     const link = `${API_URL}/discover/movie?api_key=${API_KEY_3}&sort_by=${sortBy}&language=en-EN`;
     fetch(link)
       .then((response) => {
@@ -50,11 +52,13 @@ const useMovies = () => {
       .then((data) => {
         setMovies(data.results);
       });
+    setLoading(false);
   };
 
   return {
     movies,
     getMovies,
+    loading,
   };
 };
 
@@ -73,7 +77,7 @@ export const App: React.FunctionComponent = () => {
     onRemoveFromFavorite,
   } = useMoviesFavorite();
 
-  const { movies, getMovies } = useMovies();
+  const { movies, getMovies, loading } = useMovies();
 
   useEffect(() => {
     getMovies({ sortBy });

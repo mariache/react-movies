@@ -66,7 +66,10 @@ export const MovieItem: React.FunctionComponent<MovieItemProps> = ({
         <div className="card-movie__img img-container">
           <Image poster_path={poster_path} backdrop_path={backdrop_path} />
           <div className="btn-container">
-            <button className="btn btn-success btn-container__button">
+            <button
+              className="btn btn-success btn-container__button"
+              style={{ backgroundColor: appTheme.palette.green }}
+            >
               More
             </button>
           </div>
@@ -78,7 +81,7 @@ export const MovieItem: React.FunctionComponent<MovieItemProps> = ({
               ? `(${moment(release_date, "YYYY-MM-DD").format("YYYY")})`
               : ""}
           </h6>
-          <p>{firstSentence()}</p>
+          <p className="d-xl-none">{firstSentence()}</p>
           <div className="card-movie__details">
             <div className="card-movie__icons d-flex justify-content-between">
               <div style={{ width: 40 }}>

@@ -10,6 +10,7 @@ export interface MovieItemType {
   backdrop_path: string;
   id: string;
   title: string;
+  overview: string;
 }
 
 export type MoviesListProps = {
@@ -38,7 +39,7 @@ export const MoviesList: React.FunctionComponent<MoviesListProps> = ({
           {movies.map((movie) => {
             return (
               <CSSTransition key={movie.id} classNames="movies" timeout={500}>
-                <div className="col-6 mb-4">
+                <div className="col-xl-6 col-lg-12 mb-4">
                   <MovieItem
                     item={movie}
                     onWatchLater={onWatchLater}

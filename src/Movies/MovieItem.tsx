@@ -15,7 +15,15 @@ export type MovieItemProps = {
 
 export const MovieItem: React.FunctionComponent<MovieItemProps> = ({
   item,
-  item: { release_date, vote_average, poster_path, backdrop_path, id, title },
+  item: {
+    release_date,
+    vote_average,
+    poster_path,
+    backdrop_path,
+    id,
+    title,
+    overview,
+  },
 
   onWatchLater,
   onRemoveWatchLater,
@@ -45,6 +53,13 @@ export const MovieItem: React.FunctionComponent<MovieItemProps> = ({
     onRemoveFromFavorite(id);
   };
 
+  const firstSentence = (): string => {
+    const overviewLength: string = overview.split(". ")[0];
+    return overviewLength.length > 200
+      ? `${overview.substring(0, 200)}...`
+      : `${overviewLength}...`;
+  };
+
   return (
     <div className="card">
       <div className="card-body card-movie">
@@ -63,6 +78,7 @@ export const MovieItem: React.FunctionComponent<MovieItemProps> = ({
               ? `(${moment(release_date, "YYYY-MM-DD").format("YYYY")})`
               : ""}
           </h6>
+          <p>{firstSentence()}</p>
           <div className="card-movie__details">
             <div className="card-movie__icons d-flex justify-content-between">
               <div style={{ width: 40 }}>

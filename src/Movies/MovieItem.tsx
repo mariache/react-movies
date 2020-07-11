@@ -75,12 +75,15 @@ export const MovieItem: React.FunctionComponent<MovieItemProps> = ({
           </div>
         </div>
         <div className="card-movie__description">
-          <h6 className="card-title card-movie__name">
-            {title}
-            {release_date
-              ? `(${moment(release_date, "YYYY-MM-DD").format("YYYY")})`
-              : ""}
-          </h6>
+          <div className="d-flex">
+            <span className="badge badge-primary ml-auto">
+              {release_date
+                ? moment(release_date, "YYYY-MM-DD").format("YYYY")
+                : ""}
+            </span>
+          </div>
+
+          <h6 className="card-title card-movie__name">{title}</h6>
           <p className="d-xl-none">{firstSentence()}</p>
           <div className="card-movie__details">
             <div className="card-movie__icons d-flex justify-content-between">

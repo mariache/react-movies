@@ -4,9 +4,45 @@ export type FiltersProps = {
   updateSortBy: (value: string) => void;
 };
 
-export const Filters: React.FunctionComponent<FiltersProps> = ({
-  updateSortBy,
-}) => {
+export const Filters: React.FC<FiltersProps> = ({ updateSortBy }) => {
+  const filtersCategory: {
+    value: string;
+    label: string;
+  }[] = [
+    {
+      value: "popularity.desc",
+      label: "Popularity Descending",
+    },
+    {
+      value: "popularity.asc",
+      label: "Popularity Ascending",
+    },
+    {
+      value: "vote_average.desc",
+      label: "Rating Descending",
+    },
+    {
+      value: "vote_average.asc",
+      label: "Rating Ascending",
+    },
+    {
+      value: "now_playing",
+      label: "Now Playing",
+    },
+    {
+      value: "upcoming",
+      label: "Upcoming",
+    },
+    {
+      value: "primary_release_date.desc",
+      label: "Release Date Descending",
+    },
+    {
+      value: "primary_release_date.asc",
+      label: "Release Date Ascending",
+    },
+  ];
+
   return (
     <form className="mb-3">
       <div className="form-group">
@@ -16,18 +52,13 @@ export const Filters: React.FunctionComponent<FiltersProps> = ({
           id="sort_by"
           onChange={(e) => updateSortBy(e.target.value)}
         >
-          <option value="popularity.desc">Popularity Descending</option>
-          <option value="popularity.asc">Popularity Ascending</option>
-          <option value="vote_average.desc">Rating Descending</option>
-          <option value="vote_average.asc">Rating Ascending</option>
-          <option value="now_playing">Now Playing</option>
-          <option value="upcoming">Upcoming</option>
-          <option value="primary_release_date.desc">
-            Release Date Descending
-          </option>
-          <option value="primary_release_date.asc">
-            Release Date Ascending
-          </option>
+          {filtersCategory.map((x, idx) => {
+            return (
+              <option key={`${x.value}-${idx}`} value={x.value}>
+                {x.label}
+              </option>
+            );
+          })}
         </select>
       </div>
     </form>

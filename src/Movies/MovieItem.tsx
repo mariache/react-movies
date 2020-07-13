@@ -53,11 +53,15 @@ export const MovieItem: React.FunctionComponent<MovieItemProps> = ({
     onRemoveFromFavorite(id);
   };
 
-  const firstSentence = (): string => {
+  const cutOverview = (): string | JSX.Element => {
     const overviewLength: string = overview.split(". ")[0];
-    return overviewLength.length > 200
-      ? `${overview.substring(0, 200)}...`
-      : `${overviewLength}...`;
+    return overviewLength.length > 200 ? (
+      `${overview.substring(0, 200)}...`
+    ) : !overviewLength.length ? (
+      <i>Overview is not presented</i>
+    ) : (
+      `${overviewLength}...`
+    );
   };
 
   return (
@@ -84,7 +88,7 @@ export const MovieItem: React.FunctionComponent<MovieItemProps> = ({
           </div>
 
           <h6 className="card-title card-movie__name">{title}</h6>
-          <p className="d-xl-none">{firstSentence()}</p>
+          <p className="d-xl-none">{cutOverview()}</p>
           <div className="card-movie__details">
             <div className="card-movie__icons d-flex justify-content-between">
               <div style={{ width: 40 }}>

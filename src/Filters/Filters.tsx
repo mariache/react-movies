@@ -48,15 +48,15 @@ export const Filters: React.FC<FiltersProps> = ({
     },
   ];
 
+  const onChangeFilter = (event) => {
+    updateSortBy(event.target.value);
+  };
+
   return (
     <form className="mb-3">
       <div className="form-group">
         <label htmlFor="sort_by">Order by:</label>
-        <select
-          className="form-control"
-          id="sort_by"
-          onChange={(e) => updateSortBy(e.target.value)}
-        >
+        <select className="form-control" id="sort_by" onChange={onChangeFilter}>
           {filtersCategory.map((x, idx) => {
             return (
               <option key={`${x.value}-${idx}`} value={x.value}>

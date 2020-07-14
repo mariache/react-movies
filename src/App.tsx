@@ -46,7 +46,7 @@ const useMovies = () => {
   const [loading, setLoading] = useState(false);
   const [pagination, setPagination] = useState({
     page: 1,
-    totalPages: 0,
+    totalPages: 1,
   });
 
   const getMovies = async ({ sortBy }) => {

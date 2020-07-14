@@ -44,18 +44,15 @@ const useMoviesFavorite = () => {
 const useMovies = () => {
   const [movies, setMovies] = useState<MovieItemType[]>([]);
   const [loading, setLoading] = useState(false);
-  const [pagination, setPagination] = useState({
-    page: 1,
-    totalPages: 1,
-  });
+  const [totalPages, setTotalPages] = useState(1);
 
-  const getMovies = async ({ sortBy }) => {
+  const getMovies = async ({ sortBy, pageNumber }) => {
     setLoading(true);
-    const link = `${API_URL}/discover/movie?api_key=${API_KEY_3}&sort_by=${sortBy}&language=en-EN`;
+    const link = `${API_URL}/discover/movie?api_key=${API_KEY_3}&sort_by=${sortBy}&page=${pageNumber}&language=en-EN`;
     const res = await axios.get(link);
     console.log(res.data);
     setMovies(res.data.results);
-    setPagination({ page: res.data.page, totalPages: res.data.total_pages });
+    setTotalPages(res.data.total_pages);
     setLoading(false);
   };
 
@@ -63,12 +60,13 @@ const useMovies = () => {
     movies,
     getMovies,
     loading,
-    pagination,
+    totalPages,
   };
 };
 
-export const App: React.FunctionComponent = () => {
+export const App: React.FC = () => {
   const [sortBy, setSortBy] = useState("popularity.desc");
+  const [pageNumber, setPageNumber] = useState(1);
 
   const {
     watchLater,
@@ -82,12 +80,12 @@ export const App: React.FunctionComponent = () => {
     onRemoveFromFavorite,
   } = useMoviesFavorite();
 
-  const { movies, getMovies, loading, pagination } = useMovies();
+  const { movies, getMovies, loading, totalPages } = useMovies();
 
   useEffect(() => {
-    getMovies({ sortBy });
+    getMovies({ sortBy, pageNumber });
     // eslint-disable-next-line
-  }, [sortBy]);
+  }, [sortBy, pageNumber]);
 
   const updateSortBy = (value) => {
     setSortBy(value);
@@ -100,7 +98,11 @@ export const App: React.FunctionComponent = () => {
           <div className="card" style={{ width: "100%" }}>
             <div className="card-body">
               <h3>Filters:</h3>
-              <Filters updateSortBy={updateSortBy} pagination={pagination} />
+              <Filters
+                updateSortBy={updateSortBy}
+                totalPages={totalPages}
+                pageNumber={pageNumber}
+              />
             </div>
           </div>
         </div>

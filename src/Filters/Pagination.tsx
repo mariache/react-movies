@@ -1,15 +1,14 @@
 import React from "react";
 
 export type PaginationProps = {
-  pagination: { page: number; totalPages: number };
+  pageNumber: number;
+  totalPages: number;
 };
 
-const Pagination: React.FC<PaginationProps> = ({
-  pagination: { page, totalPages },
-}) => {
+const Pagination: React.FC<PaginationProps> = ({ pageNumber, totalPages }) => {
   return (
     <div>
-      Page {page} from {totalPages}
+      Page {pageNumber} from {totalPages}
     </div>
   );
 };

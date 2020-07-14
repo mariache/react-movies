@@ -1,10 +1,15 @@
 import React from "react";
+import Pagination from "./Pagination";
 
 export type FiltersProps = {
   updateSortBy: (value: string) => void;
+  pagination: { page: number; totalPages: number };
 };
 
-export const Filters: React.FC<FiltersProps> = ({ updateSortBy }) => {
+export const Filters: React.FC<FiltersProps> = ({
+  updateSortBy,
+  pagination,
+}) => {
   const filtersCategory: {
     value: string;
     label: string;
@@ -60,6 +65,7 @@ export const Filters: React.FC<FiltersProps> = ({ updateSortBy }) => {
             );
           })}
         </select>
+        <Pagination pagination={pagination} />
       </div>
     </form>
   );

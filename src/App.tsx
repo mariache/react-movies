@@ -44,11 +44,18 @@ const useMoviesFavorite = () => {
 const useMovies = () => {
   const [movies, setMovies] = useState<MovieItemType[]>([]);
   const [loading, setLoading] = useState(false);
+  const [pagination, setPagination] = useState({
+    page: 1,
+    totalPages: 0,
+  });
+
   const getMovies = async ({ sortBy }) => {
     setLoading(true);
     const link = `${API_URL}/discover/movie?api_key=${API_KEY_3}&sort_by=${sortBy}&language=en-EN`;
     const res = await axios.get(link);
+    console.log(res.data);
     setMovies(res.data.results);
+    setPagination({ page: res.data.page, totalPages: res.data.total_pages });
     setLoading(false);
   };
 
@@ -56,6 +63,7 @@ const useMovies = () => {
     movies,
     getMovies,
     loading,
+    pagination,
   };
 };
 
@@ -74,7 +82,7 @@ export const App: React.FunctionComponent = () => {
     onRemoveFromFavorite,
   } = useMoviesFavorite();
 
-  const { movies, getMovies, loading } = useMovies();
+  const { movies, getMovies, loading, pagination } = useMovies();
 
   useEffect(() => {
     getMovies({ sortBy });
@@ -92,7 +100,7 @@ export const App: React.FunctionComponent = () => {
           <div className="card" style={{ width: "100%" }}>
             <div className="card-body">
               <h3>Filters:</h3>
-              <Filters updateSortBy={updateSortBy} />
+              <Filters updateSortBy={updateSortBy} pagination={pagination} />
             </div>
           </div>
         </div>

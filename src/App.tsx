@@ -50,7 +50,6 @@ const useMovies = () => {
     setLoading(true);
     const link = `${API_URL}/discover/movie?api_key=${API_KEY_3}&sort_by=${sortBy}&page=${pageNumber}&language=en-EN`;
     const res = await axios.get(link);
-    console.log(res.data);
     setMovies(res.data.results);
     setTotalPages(res.data.total_pages);
     setLoading(false);
@@ -91,6 +90,10 @@ export const App: React.FC = () => {
     setSortBy(value);
   };
 
+  const onChangePage = (number) => {
+    setPageNumber(number);
+  };
+
   return (
     <div className="container">
       <div className="row mt-4">
@@ -102,6 +105,7 @@ export const App: React.FC = () => {
                 updateSortBy={updateSortBy}
                 totalPages={totalPages}
                 pageNumber={pageNumber}
+                onChangePage={onChangePage}
               />
             </div>
           </div>

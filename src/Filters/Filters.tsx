@@ -5,12 +5,14 @@ export type FiltersProps = {
   updateSortBy: (value: string) => void;
   pageNumber: number;
   totalPages: number;
+  onChangePage: (number) => void;
 };
 
 export const Filters: React.FC<FiltersProps> = ({
   updateSortBy,
   totalPages,
   pageNumber,
+  onChangePage,
 }) => {
   const filtersCategory: {
     value: string;
@@ -67,7 +69,11 @@ export const Filters: React.FC<FiltersProps> = ({
             );
           })}
         </select>
-        <Pagination totalPages={totalPages} pageNumber={pageNumber} />
+        <Pagination
+          totalPages={totalPages}
+          pageNumber={pageNumber}
+          onChangePage={onChangePage}
+        />
       </div>
     </form>
   );

@@ -1,6 +1,10 @@
 @import url("https://fonts.googleapis.com/css?family=Roboto");
 
 /* Global Styles */
+:root {
+  --green: #4CAF50;
+  --dark: #081C24;
+}
 
 *,
 :after,
@@ -106,11 +110,28 @@ code {
 }
 
 .btn-container_button {
-  background-color: #4CAF50;
+  background-color: var(--green);
   color: white;
   font-size: 16px;
   padding: 16px 32px;
 }
+
+.btn-pagination {
+  display: flex !important;
+  margin: 10px 0;
+}
+
+.btn-pagination button {
+  color: #fff;
+  background-color: var(--dark);
+  font-weight: 600;
+}
+
+.btn-pagination button:hover {
+  background-color: var(--dark);
+  color: var(--green);
+}
+
 
 @keyframes movies {
   0% {

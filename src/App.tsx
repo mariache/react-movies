@@ -86,11 +86,11 @@ export const App: React.FC = () => {
     // eslint-disable-next-line
   }, [sortBy, pageNumber]);
 
-  const updateSortBy = (value) => {
+  const updateSortBy = (value: string) => {
     setSortBy(value);
   };
 
-  const onChangePage = (number) => {
+  const onChangePage = (number: number) => {
     setPageNumber(number);
   };
 

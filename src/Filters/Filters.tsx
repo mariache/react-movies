@@ -5,7 +5,7 @@ export type FiltersProps = {
   updateSortBy: (value: string) => void;
   pageNumber: number;
   totalPages: number;
-  onChangePage: (number) => void;
+  onChangePage: (number: number) => void;
 };
 
 export const Filters: React.FC<FiltersProps> = ({

@@ -132,6 +132,19 @@ code {
   color: var(--green);
 }
 
+.clear-btn {
+  background-color: var(--dark);
+  color: #fff;
+  margin: 10px 0;
+  width: 100%;
+  font-weight: 600;
+}
+
+.clear-btn:hover {
+  color: var(--green);
+}
+
+
 
 @keyframes movies {
   0% {

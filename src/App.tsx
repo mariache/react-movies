@@ -94,6 +94,11 @@ export const App: React.FC = () => {
     setPageNumber(number);
   };
 
+  const onReset = () => {
+    setSortBy("popularity.desc");
+    setPageNumber(1);
+  };
+
   return (
     <div className="container">
       <div className="row mt-4">
@@ -106,6 +111,7 @@ export const App: React.FC = () => {
                 totalPages={totalPages}
                 pageNumber={pageNumber}
                 onChangePage={onChangePage}
+                onReset={onReset}
               />
             </div>
           </div>

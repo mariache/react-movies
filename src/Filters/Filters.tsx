@@ -6,6 +6,7 @@ export type FiltersProps = {
   pageNumber: number;
   totalPages: number;
   onChangePage: (number: number) => void;
+  onReset: () => void;
 };
 
 export const Filters: React.FC<FiltersProps> = ({
@@ -13,6 +14,7 @@ export const Filters: React.FC<FiltersProps> = ({
   totalPages,
   pageNumber,
   onChangePage,
+  onReset,
 }) => {
   const filtersCategory: {
     value: string;
@@ -59,6 +61,9 @@ export const Filters: React.FC<FiltersProps> = ({
   return (
     <form className="mb-3">
       <div className="form-group">
+        <button type="button" className="btn clear-btn" onClick={onReset}>
+          Reset filters
+        </button>
         <label htmlFor="sort_by">Order by:</label>
         <select className="form-control" id="sort_by" onChange={onChangeFilter}>
           {filtersCategory.map((x, idx) => {

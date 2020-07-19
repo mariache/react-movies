@@ -54,7 +54,7 @@ export const Filters: React.FC<FiltersProps> = ({
     },
   ];
 
-  const onChangeFilter = (event) => {
+  const onChangeFilter = (event: React.ChangeEvent<HTMLSelectElement>) => {
     updateSortBy(event.target.value);
   };
 

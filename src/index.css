@@ -132,6 +132,13 @@ code {
   color: var(--green);
 }
 
+.btn-pagination button:disabled {
+  color: #fff;
+  background-color: var(--dark);
+  cursor: not-allowed;
+}
+
+
 .clear-btn {
   background-color: var(--dark);
   color: #fff;

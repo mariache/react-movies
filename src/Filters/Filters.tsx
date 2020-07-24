@@ -61,7 +61,12 @@ export const Filters: React.FC<FiltersProps> = ({
   return (
     <form className="mb-3">
       <div className="form-group">
-        <button type="button" className="btn clear-btn" onClick={onReset}>
+        <button
+          type="button"
+          className="btn clear-btn btn-light"
+          onClick={onReset}
+          style={{ border: "1px solid #ced4da" }}
+        >
           Reset filters
         </button>
         <label htmlFor="sort_by">Order by:</label>

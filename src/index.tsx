@@ -8,6 +8,7 @@ import { createStore, compose, applyMiddleware } from "redux";
 import { Provider } from "react-redux";
 import rootReducer from "store/reducers/rootReducer";
 import thunk from "redux-thunk";
+import { ErrorBoundry } from "components/Spinner/ErrorBoundry";
 
 const composeEnhancers =
   (window["__REDUX_DEVTOOLS_EXTENSION_COMPOSE__"] as typeof compose) || compose;
@@ -19,7 +20,9 @@ const store = createStore(
 
 const app: JSX.Element = (
   <Provider store={store}>
-    <App />
+    <ErrorBoundry>
+      <App />
+    </ErrorBoundry>
   </Provider>
 );
 

@@ -2,16 +2,7 @@ import React from "react";
 import MovieItem from "./MovieItem";
 
 import { TransitionGroup, CSSTransition } from "react-transition-group";
-
-export interface MovieItemType {
-  vote_average: number;
-  release_date: Date;
-  poster_path: string;
-  backdrop_path: string;
-  id: string;
-  title: string;
-  overview: string;
-}
+import { MovieItemType } from "types";
 
 export type MoviesListProps = {
   movies: Array<MovieItemType>;

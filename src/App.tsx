@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from "react";
 import Filters from "./Filters/Filters";
-import MoviesList, { MovieItemType } from "./Movies/MoviesList";
+import MoviesList from "./Movies/MoviesList";
 import { API_URL, API_KEY_3 } from "./api/api";
 import Spinner from "components/Spinner/Spinner";
 import axios from "axios";
+import { MovieItemType } from "types";
 
 const useMoviesWatchLater = () => {
   const [watchLater, setWatchLater] = useState<MovieItemType[]>([]);

@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import RatingProgressBar from "../components/RatingProgressBar";
 import moment from "moment";
 import Image from "components/Image";
-import { MovieItemType } from "./MoviesList";
 import { appTheme } from "appTheme";
+import { MovieItemType } from "types";
 
 export type MovieItemProps = {
   item: MovieItemType;

@@ -9,6 +9,17 @@ export type FiltersProps = {
   onReset: () => void;
 };
 
+export enum FiltersLabels {
+  releaseDateDesc = "Release Date Descending",
+  releaseDateAsc = "Release Date Ascending",
+  popularDesc = "Popularity Descending",
+  popularAsc = "Popularity Ascending",
+  rateDesc = "Rating Descending",
+  rateAsc = "Rating Ascending",
+  nowPlaying = "Now Playing",
+  upcoming = "Upcoming",
+}
+
 export const Filters: React.FC<FiltersProps> = ({
   updateSortBy,
   totalPages,
@@ -22,35 +33,35 @@ export const Filters: React.FC<FiltersProps> = ({
   }[] = [
     {
       value: "popularity.desc",
-      label: "Popularity Descending",
+      label: FiltersLabels.popularDesc,
     },
     {
       value: "popularity.asc",
-      label: "Popularity Ascending",
+      label: FiltersLabels.popularAsc,
     },
     {
       value: "vote_average.desc",
-      label: "Rating Descending",
+      label: FiltersLabels.rateDesc,
     },
     {
       value: "vote_average.asc",
-      label: "Rating Ascending",
+      label: FiltersLabels.rateAsc,
     },
     {
       value: "now_playing",
-      label: "Now Playing",
+      label: FiltersLabels.nowPlaying,
     },
     {
       value: "upcoming",
-      label: "Upcoming",
+      label: FiltersLabels.upcoming,
     },
     {
       value: "primary_release_date.desc",
-      label: "Release Date Descending",
+      label: FiltersLabels.releaseDateDesc,
     },
     {
       value: "primary_release_date.asc",
-      label: "Release Date Ascending",
+      label: FiltersLabels.releaseDateAsc,
     },
   ];
 
